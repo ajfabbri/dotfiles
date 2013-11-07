@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/fabbri/Code'
+let g:netrw_dirhist_2='/home/fabbri/Code/linux-3.10.10'
+let g:netrw_dirhist_3='/home/fabbri/Code/linux-3.10.10/arch'
+let g:netrw_dirhist_4='/home/fabbri/Code/linux-3.10.10/arch/x86'
+let g:netrw_dirhist_5='/home/fabbri/Code/linux-3.10.10/Documentation'
+let g:netrw_dirhist_6='/home/fabbri/Code/trace-cmd'
+let g:netrw_dirhist_7='/home/fabbri/Code/trace-cmd/yoshihiro-v2-patches'
+let g:netrw_dirhist_8='/home/fabbri/Code/trace-cmd'
+let g:netrw_dirhist_9='/home/fabbri/Code/trace-cmd/yoshihiro-v2-patches'
