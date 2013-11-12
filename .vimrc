@@ -21,6 +21,8 @@ noremap <C-k> :cp<CR>
 colo desert
 
 " Custom startup macros
+command! PwdStartup :so ~/.vim/pwd-startup.vim
+
 command! LatestLinuxStartup :so ~/.vim/latest-linux-startup.vim
 command! WrlGaStartup :so ~/.vim/wrga-linux-startup.vim
 command! RT310Startup :so ~/.vim/rt310-linux-startup.vim
