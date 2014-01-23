@@ -34,9 +34,11 @@ echo "Feel free to manually copy old stuff into the new .vim*"
 mkdir .vimbackup || die mkdir
 mv .vim .vimbackup || warn "No existing .vim?"
 mv .vimrc .vimbackup || warn "No existing .vmirc?"
+mkdir .dotfilesbackup || die mkdir
+mv .screenrc .dotfilesbackup || warn "No existing .screenrc?"
 
 echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
 ln -s  ${DOT_INSTALL_DIR}/.vim .vim || die ln
 ln -s ${DOT_INSTALL_DIR}/.vimrc .vimrc || die ln
-
+ln -s ${DOT_INSTALL_DIR}/.screenrc .screenrc || die ln
 

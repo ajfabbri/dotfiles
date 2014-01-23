@@ -1,0 +1,4 @@
+caption always
+defscrollback 10000
+
+bell_msg "w00t w00t"
