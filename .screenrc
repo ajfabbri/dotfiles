@@ -1,3 +1,8 @@
+screen -t "~~~~~~~~~~~~~~~~~~~~~~~~~~ bashie ~~~~~~~~~~~~~~~~~~~~~~~~~"
+screen -t "SSSSSSSSSSSSSSSSSSSSSSSSSS  src   SSSSSSSSSSSSSSSSSSSSSSSSSS"
+screen -t "DDDDDDDDDDDDDDDDDDDDDDDD  devnotes DDDDDDDDDDDDDDDDDDDDDDDDD"
+screen -t "VMVMVMVMVMVMVMVMVMVMVMVMVM   vm   VMVMVMVMVMVMVMVMVMVMVMVMVM"
+
 caption always
 defscrollback 10000
 

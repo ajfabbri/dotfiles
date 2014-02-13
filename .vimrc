@@ -23,15 +23,6 @@ colo desert
 " Custom startup macros
 command! PwdStartup :so ~/.vim/pwd-startup.vim
 
-command! LatestLinuxStartup :so ~/.vim/latest-linux-startup.vim
-command! WrlGaStartup :so ~/.vim/wrga-linux-startup.vim
-command! RT310Startup :so ~/.vim/rt310-linux-startup.vim
-command! Yocto310Startup :so ~/.vim/yocto310-linux-startup.vim
-command! RT32Startup :so ~/.vim/rt32-linux-startup.vim
-command! NumactlStartup :so ~/.vim/numactl-startup.vim
-command! LatTestStartup :so ~/.vim/lattest-startup.vim
-command! RubiconLatencyStartup :so ~/.vim/rubicon-latency-startup.vim
-command! QemuUpsreamStartup :so ~/.vim/qemu-upstream-startup.vim
 
 " Enable cindent with my prefs -AF
 function! Af_set_cindent()
