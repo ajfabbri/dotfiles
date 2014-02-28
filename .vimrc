@@ -1,5 +1,6 @@
 set vb
-syntax enable
+syntax on
+filetype indent plugin on
 set hls
 
 set modeline
@@ -22,7 +23,6 @@ colo desert
 
 " Custom startup macros
 command! PwdStartup :so ~/.vim/pwd-startup.vim
-
 
 " Enable cindent with my prefs -AF
 function! Af_set_cindent()
