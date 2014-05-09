@@ -32,6 +32,8 @@ function! Af_set_cindent()
 	set cino=(1s
 endfunction
 
+au BufNewFile,BufRead *.gradle setf groovy
+
 if !exists("s:autocommands_loaded")
 	let s:autocommands_loaded = 1
 	au BufReadPre,FileReadPre	*.[ch] call Af_set_cindent()
