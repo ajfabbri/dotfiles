@@ -1,0 +1,8 @@
+[user]
+	name = Aaron Fabbri
+	email = ajfabbri@gmail.com
+[push]
+	default = current
+[alias]
+	d = diff
+	dc = diff --cached
