@@ -41,4 +41,5 @@ echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
 ln -s  ${DOT_INSTALL_DIR}/.vim .vim || die ln
 ln -s ${DOT_INSTALL_DIR}/.vimrc .vimrc || die ln
 ln -s ${DOT_INSTALL_DIR}/.screenrc .screenrc || die ln
+ln -s ${DOT_INSTALL_DIR}/.ideavimrc .ideavimrc || die ln ideavimrc
 
