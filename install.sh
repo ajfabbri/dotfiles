@@ -36,10 +36,13 @@ mv .vim .vimbackup || warn "No existing .vim?"
 mv .vimrc .vimbackup || warn "No existing .vmirc?"
 mkdir .dotfilesbackup || die mkdir
 mv .screenrc .dotfilesbackup || warn "No existing .screenrc?"
+mv .tmux.conf .dotfilesbackup || warn  "No existing .tmux.conf"
+
 
 echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
-ln -s  ${DOT_INSTALL_DIR}/.vim .vim || die ln
-ln -s ${DOT_INSTALL_DIR}/.vimrc .vimrc || die ln
-ln -s ${DOT_INSTALL_DIR}/.screenrc .screenrc || die ln
+ln -s  ${DOT_INSTALL_DIR}/.vim .vim || die ln dot vim
+ln -s ${DOT_INSTALL_DIR}/.vimrc .vimrc || die ln vim rc
+ln -s ${DOT_INSTALL_DIR}/.screenrc .screenrc || die ln screen rc
 ln -s ${DOT_INSTALL_DIR}/.ideavimrc .ideavimrc || die ln ideavimrc
+ln -s ${DOT_INSTALL_DIR}/.tmux.conf .tmux.conf || die ln tmux conf
 
