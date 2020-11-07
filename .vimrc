@@ -22,7 +22,7 @@ noremap <C-k> :cp<CR>
 colo desert
 
 " Custom startup macros
-command! PwdStartup :so ~/.vim/pwd-startup.vim
+" command! PwdStartup :so ~/.vim/pwd-startup.vim
 
 " Enable cindent with my prefs -AF
 function! Af_set_cindent()
