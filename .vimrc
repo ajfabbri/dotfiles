@@ -25,7 +25,7 @@ set tw=80
 noremap <C-j> :cn<CR>
 noremap <C-k> :cp<CR>
 
-colo desert
+colorscheme desert256
 
 " Custom startup macros
 " command! PwdStartup :so ~/.vim/pwd-startup.vim
