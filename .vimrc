@@ -108,3 +108,5 @@ if has("cscope")
     endif
     cs reset
 endif
+
+set number
