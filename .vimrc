@@ -1,7 +1,6 @@
 set vb
-syntax on
-filetype indent on
-filetype plugin on
+syntax enable
+filetype plugin indent on
 set hls
 
 set modeline
@@ -26,6 +25,40 @@ noremap <C-j> :cn<CR>
 noremap <C-k> :cp<CR>
 
 colorscheme desert256
+
+" ============================
+" vim-plug: 	see .vim/autoload/plug.vim
+"
+call plug#begin('~/.vim/plugged')
+
+"Async Lint Engine
+Plug 'dense-analysis/ale' 
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+Plug 'jlanzarotta/bufexplorer'
+
+" Initialize plugin system
+call plug#end()
+" ============================
+
+" Plugin config
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
+
+" TODO lang client bindings
 
 " Custom startup macros
 " command! PwdStartup :so ~/.vim/pwd-startup.vim
@@ -110,3 +143,4 @@ if has("cscope")
 endif
 
 set number
+set ttimeoutlen=10
