@@ -31,7 +31,18 @@ colorscheme desert256
 "
 call plug#begin('~/.vim/plugged')
 
-"Async Lint Engine
+Plug 'dr-kino/cscope-maps'
+
+" Doesn't support neovim
+"Plug 'yegappan/grep'
+
+" on: lazy loaded
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+
+" like fugitive, but for mercurial
+Plug 'jlfwong/vim-mercenary'
+
+" Async Lint Engine
 Plug 'dense-analysis/ale' 
 
 Plug 'autozimu/LanguageClient-neovim', {
@@ -85,8 +96,8 @@ set smartcase
 set ff=unix
 
 " highlight spurious whitespace before the linter does
-highlight ExtraWhitespace ctermbg=lightgreen guibg=lightgreen                   
-match ExtraWhitespace /\s\+$/  
+highlight ExtraWhitespace ctermbg=lightgreen guibg=lightgreen 
+match ExtraWhitespace /\s\+$/
 
 " backups are a little silly when you're using patches constantly
 set nobackup
@@ -118,10 +129,6 @@ function GetGooglePythonIndent(lnum)
   return GetPythonIndent(a:lnum)
 endfunction
 
-" cscope stuff
-set cscopetag
-set csto=1
-
 " F7 to refresh cscope
 map <F7> :!cscope -R -b -q <CR>
    \:cscope reset<CR>
@@ -130,17 +137,6 @@ map <F7> :!cscope -R -b -q <CR>
 map <F8> :!find . -name \*.py \! -path \*qinternal\* > ~/tmp/pycscope_files <CR>
    \:!pycscope -R -f pycscope.out -i ~/tmp/pycscope_files <CR>
    \:cscope reset<CR>
-
-" auto add cscope.oput/pycscope.out when you run vim.. only looks in current dir
-if has("cscope")
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    if filereadable("pycscope.out")
-        cs add pycscope.out
-    endif
-    cs reset
-endif
 
 set number
 set ttimeoutlen=10
