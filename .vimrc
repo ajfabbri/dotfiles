@@ -140,3 +140,7 @@ map <F8> :!find . -name \*.py \! -path \*qinternal\* > ~/tmp/pycscope_files <CR>
 
 set number
 set ttimeoutlen=10
+
+" Specific work stuff
+source ~/src/.vimrc
+
