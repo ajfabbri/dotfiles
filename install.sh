@@ -31,10 +31,12 @@ fi
 
 echo "Moving existing .vim/ and .vimrc into .vimbackup/."
 echo "Feel free to manually copy old stuff into the new .vim*"
-mkdir .vimbackup || die mkdir
+mkdir .vimbackup || \
+	die "mkdir: remove existing backupdirs .vimbackup .dotfilesbackup and try again"
 mv .vim .vimbackup || warn "No existing .vim?"
 mv .vimrc .vimbackup || warn "No existing .vmirc?"
-mkdir .dotfilesbackup || die mkdir
+mkdir .dotfilesbackup || \
+	die "mkdir: remove existing backupdirs .vimbackup .dotfilesbackup and try again"
 mv .screenrc .dotfilesbackup || warn "No existing .screenrc?"
 mv .tmux.conf .dotfilesbackup || warn  "No existing .tmux.conf"
 
