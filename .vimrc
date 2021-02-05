@@ -45,15 +45,21 @@ Plug 'jlfwong/vim-mercenary'
 " Async Lint Engine
 Plug 'dense-analysis/ale' 
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" official rust vim plugin
+Plug 'rust-lang/rust.vim'
+
+" requires cargo, which doesn't play nice with other build systems
+"  :'-( 
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 
 Plug 'jlanzarotta/bufexplorer'
+
 
 " Initialize plugin system
 call plug#end()
@@ -143,4 +149,3 @@ set ttimeoutlen=10
 
 " Specific work stuff
 source ~/src/.vimrc
-
