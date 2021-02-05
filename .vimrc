@@ -42,11 +42,25 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " like fugitive, but for mercurial
 Plug 'jlfwong/vim-mercenary'
 
-" Async Lint Engine
-" Plug 'dense-analysis/ale' 
+"" RUST hopes and dreams
 
 " official rust vim plugin
 Plug 'rust-lang/rust.vim'
+
+" Tagbar is nice-to-have for ctags navigation
+Plug 'preservim/tagbar'
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+" Type \be to open list of buffers, sorted by MRU
+Plug 'jlanzarotta/bufexplorer'
+
+" Dream: use rust-analyzer. See :
+" https://rust-analyzer.github.io/manual.html#non-cargo-based-projects
+
+" Nope: needs cargo. Async Lint Engine
+" Plug 'dense-analysis/ale' 
 
 " requires cargo, which doesn't play nice with other build systems
 "  :'-( 
@@ -54,11 +68,6 @@ Plug 'rust-lang/rust.vim'
 "     \ 'branch': 'next',
 "     \ 'do': 'bash install.sh',
 "     \ }
-
-" (Optional) Multi-entry selection UI.
-Plug 'junegunn/fzf'
-
-Plug 'jlanzarotta/bufexplorer'
 
 
 " Initialize plugin system
