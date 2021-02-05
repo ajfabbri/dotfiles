@@ -43,7 +43,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'jlfwong/vim-mercenary'
 
 " Async Lint Engine
-Plug 'dense-analysis/ale' 
+" Plug 'dense-analysis/ale' 
 
 " official rust vim plugin
 Plug 'rust-lang/rust.vim'
