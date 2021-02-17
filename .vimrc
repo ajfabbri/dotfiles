@@ -1,13 +1,13 @@
 set vb
 syntax enable
-filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
 set hls
 
-set modeline
-set modelines=20
-
+" set modeline
+" set modelines=20
 set statusline=%F%m%r%h\ %=\ [L%l\ C%v][%p%%]
-
 set laststatus=2
 
 " syntax folding
@@ -21,8 +21,9 @@ set softtabstop=4
 set ai
 set tw=80
 
-noremap <C-j> :cn<CR>
-noremap <C-k> :cp<CR>
+" shortcut moving up/down quickfix items
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
 
 colorscheme desert256
 
@@ -56,6 +57,10 @@ Plug 'junegunn/fzf'
 " Type \be to open list of buffers, sorted by MRU
 Plug 'jlanzarotta/bufexplorer'
 
+" Suggestions from coworkers, good for pairing
+Plug 'shrinidhisondur/qtest.vim'
+Plug 'vim-scripts/a.vim'
+
 " Dream: use rust-analyzer. See :
 " https://rust-analyzer.github.io/manual.html#non-cargo-based-projects
 
@@ -74,7 +79,10 @@ Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 " ============================
 
-" Plugin config
+" ---------- Plugin config and shortcuts ----------
+
+" open/close tagbar
+nmap :tt<CR> :Tagbar<CR>
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
@@ -118,6 +126,12 @@ match ExtraWhitespace /\s\+$/
 set nobackup
 set noswapfile
 
+
+set number
+set ttimeoutlen=10
+
+" --------------- more work-specific stuff ---------------
+
 " q support for python.vim
 function GetGooglePythonIndent(lnum)
   " Indent inside parens.
@@ -153,8 +167,4 @@ map <F8> :!find . -name \*.py \! -path \*qinternal\* > ~/tmp/pycscope_files <CR>
    \:!pycscope -R -f pycscope.out -i ~/tmp/pycscope_files <CR>
    \:cscope reset<CR>
 
-set number
-set ttimeoutlen=10
-
-" Specific work stuff
 source ~/src/.vimrc
