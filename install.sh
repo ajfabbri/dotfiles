@@ -18,7 +18,7 @@ die() {
 warn () {
     printf >&2 -- '%s\n' "$1"
 }
-	
+
 cd $HOME || die chdir
 
 if [ ! -d "$DOT_INSTALL_DIR" ]
@@ -41,10 +41,12 @@ mv .screenrc .dotfilesbackup || warn "No existing .screenrc?"
 mv .tmux.conf .dotfilesbackup || warn  "No existing .tmux.conf"
 
 
+do_link() {
+    ln -s ${DOT_INSTALL_DIR}/$1 || die "error linking $1"
+}
 echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
-ln -s  ${DOT_INSTALL_DIR}/.vim .vim || die ln dot vim
-ln -s ${DOT_INSTALL_DIR}/.vimrc .vimrc || die ln vim rc
-ln -s ${DOT_INSTALL_DIR}/.screenrc .screenrc || die ln screen rc
-ln -s ${DOT_INSTALL_DIR}/.ideavimrc .ideavimrc || die ln ideavimrc
-ln -s ${DOT_INSTALL_DIR}/.tmux.conf .tmux.conf || die ln tmux conf
+for f in .vim .vimrc .screenrc .idearc .tmux.conf .gitconfig
+do
+    do_link $f
+done
 
