@@ -19,6 +19,15 @@ warn () {
     printf >&2 -- '%s\n' "$1"
 }
 
+do_backup() {
+    mv $1 $2 2> /dev/null || warn "No existing $1, ignoring."
+}
+
+do_link() {
+    ln -s ${DOT_INSTALL_DIR}/$1 || die "error linking $1"
+}
+
+
 cd $HOME || die chdir
 
 if [ ! -d "$DOT_INSTALL_DIR" ]
@@ -29,23 +38,22 @@ then
 	exit
 fi
 
-echo "Moving existing .vim/ and .vimrc into .vimbackup/."
-echo "Feel free to manually copy old stuff into the new .vim*"
-mkdir .vimbackup || \
-	die "mkdir: remove existing backupdirs .vimbackup .dotfilesbackup and try again"
-mv .vim .vimbackup || warn "No existing .vim?"
-mv .vimrc .vimbackup || warn "No existing .vmirc?"
+echo "Moving existing dot files to .dotfilesbackup"
+echo "(Feel free to manually copy old stuff back in after.)"
 mkdir .dotfilesbackup || \
-	die "mkdir: remove existing backupdirs .vimbackup .dotfilesbackup and try again"
-mv .screenrc .dotfilesbackup || warn "No existing .screenrc?"
-mv .tmux.conf .dotfilesbackup || warn  "No existing .tmux.conf"
+	die "mkdir: move existing backup dir .dotfilesbackup and try again"
 
+VIMFILES=".vim .vimrc"
+RCFILES=".gitconfig .ideavimrc .tmux.conf .screenrc"
+ALL="$VIMFILES $RCFILES"
 
-do_link() {
-    ln -s ${DOT_INSTALL_DIR}/$1 || die "error linking $1"
-}
+for f in $ALL
+do
+    do_backup $f .dotfilesbackup
+done
+
 echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
-for f in .vim .vimrc .screenrc .idearc .tmux.conf .gitconfig
+for f in $ALL
 do
     do_link $f
 done
