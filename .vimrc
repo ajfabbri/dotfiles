@@ -167,4 +167,5 @@ map <F8> :!find . -name \*.py \! -path \*qinternal\* > ~/tmp/pycscope_files <CR>
    \:!pycscope -R -f pycscope.out -i ~/tmp/pycscope_files <CR>
    \:cscope reset<CR>
 
-source ~/src/.vimrc
+" Add any repo-specific settings like so
+" source ~/src/.vimrc
