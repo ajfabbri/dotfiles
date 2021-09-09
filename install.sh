@@ -28,7 +28,7 @@ do_link() {
 }
 
 
-cd $HOME || die chdir
+pushd $HOME || die chdir
 
 if [ ! -d "$DOT_INSTALL_DIR" ]
 then
@@ -58,3 +58,10 @@ do
     do_link $f
 done
 
+if [ ! -f ~/.config/nvim/init.vim ]
+then
+    mkdir -p ~/.config/nvim 2>&1 > /dev/null
+    ln -s $DOT_INSTALL_DIR/.config/nvim/init.vim .config/nvim/init.vim
+fi
+
+popd
