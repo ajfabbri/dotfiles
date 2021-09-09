@@ -57,6 +57,9 @@ Plug 'junegunn/fzf'
 " Type \be to open list of buffers, sorted by MRU
 Plug 'jlanzarotta/bufexplorer'
 
+" Figlet please
+Plug 'fadein/vim-FIGlet'
+
 " Suggestions from coworkers, good for pairing
 Plug 'shrinidhisondur/qtest.vim'
 Plug 'vim-scripts/a.vim'
