@@ -6,3 +6,5 @@
 [alias]
 	d = diff
 	dc = diff --cached
+[pull]
+	ff = only
