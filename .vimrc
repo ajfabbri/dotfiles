@@ -64,6 +64,9 @@ Plug 'fadein/vim-FIGlet'
 Plug 'shrinidhisondur/qtest.vim'
 Plug 'vim-scripts/a.vim'
 
+" Plug 'neoclide/coc.nvim'
+Plug 'vim-scripts/AnsiEsc.vim'
+
 " Dream: use rust-analyzer. See :
 " https://rust-analyzer.github.io/manual.html#non-cargo-based-projects
 
