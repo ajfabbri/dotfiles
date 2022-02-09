@@ -1,10 +1,19 @@
 [user]
 	name = Aaron Fabbri
-	email = fabbri@vectorized.io
+	email = fabbri@redpanda.com
 [push]
 	default = current
 [alias]
 	d = diff
 	dc = diff --cached
+        lg =  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)\
+            - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- \
+            %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+        s = status
+        sw = switch
 [pull]
 	ff = only
+[diff]
+    guitool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
