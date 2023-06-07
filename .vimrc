@@ -84,10 +84,10 @@ else
     " https://rust-analyzer.github.io/manual.html#non-cargo-based-projects
 
     " Nope: needs cargo. Async Lint Engine
-    " Plug 'dense-analysis/ale' 
+    " Plug 'dense-analysis/ale'
 
     " requires cargo, which doesn't play nice with other build systems
-    "  :'-( 
+    "  :'-(
     " Plug 'autozimu/LanguageClient-neovim', {
     "     \ 'branch': 'next',
     "     \ 'do': 'bash install.sh',
