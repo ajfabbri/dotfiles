@@ -9,6 +9,9 @@
 
 GIT_URL="https://github.com/ajfabbri/dotfiles.git"
 DOT_INSTALL_DIR=dotfiles
+NVIM_SITE="$HOME/.local/share/nvim/site"
+NVIM_UNDO_DIR="$HOME/.vim/undodir"
+
 
 die() {
     printf >&2 -- '%s\n' "$1"
@@ -19,49 +22,52 @@ warn () {
     printf >&2 -- '%s\n' "$1"
 }
 
-do_backup() {
-    mv $1 $2 2> /dev/null || warn "No existing $1, ignoring."
+info () {
+     echo "==> $1"
 }
 
 do_link() {
-    ln -s ${DOT_INSTALL_DIR}/$1 || die "error linking $1"
+	ln -s $(pwd)/${DOT_INSTALL_DIR}/$1 "$(pwd)/$1" || die "error linking $1"
 }
 
+print_hints() {
+    info "Finished install."
+    echo "You should also make sure you have a recent version of neovim, e.g:"
+    echo "cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
+    echo "sudo apt install fuse"
+    echo "sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
+}
 
 pushd $HOME || die chdir
 
 if [ ! -d "$DOT_INSTALL_DIR" ]
 then
-	echo "Didn't find new Vim config.  Try running this in your home dir:"
+	echo "Missing dotfiles dir.  Try running this in $HOME"
 	echo "  git clone $GIT_URL $DOT_INSTALL_DIR"
 	echo "Exiting."
 	exit
 fi
 
-echo "Moving existing dot files to .dotfilesbackup"
-echo "(Feel free to manually copy old stuff back in after.)"
-mkdir .dotfilesbackup || \
-	die "mkdir: move existing backup dir .dotfilesbackup and try again"
 
-VIMFILES=".vim .vimrc"
-RCFILES=".gitconfig .ideavimrc .tmux.conf .screenrc"
-ALL="$VIMFILES $RCFILES"
+VIMPATHS=".vim .config/nvim"
+RCFILES=".gitconfig .ideavimrc .tmux.conf"
+ALL="$RCFILES $VIMPATHS"
 
-for f in $ALL
-do
-    do_backup $f .dotfilesbackup
-done
+info "Backing up existing stuff to .dotfilesbackup"
+rsync -abL $ALL .dotfilesbackup/ || info "Ignoring missing files; new install"
+rm -r $ALL || info "Ignoring missing files; new install"
 
-echo "Symlinking to new goodness in $DOT_INSTALL_DIR."
+info "Symlinking to new goodness in $DOT_INSTALL_DIR."
 for f in $ALL
 do
     do_link $f
 done
 
-if [ ! -f ~/.config/nvim/init.vim ]
-then
-    mkdir -p ~/.config/nvim 2>&1 > /dev/null
-    ln -s $HOME/$DOT_INSTALL_DIR/.config/nvim/init.vim .config/nvim/init.vim
+# Neovim setup
+if [ ! -d "$NVIM_UNDO_DIR" ]; then
+	info "Creating $NVIM_UNDO_DIR"
+	mkdir -p $HOME/.vim/undodir
 fi
 
+print_hints
 popd
