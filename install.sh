@@ -36,6 +36,9 @@ print_hints() {
     echo "cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
     echo "sudo apt install fuse"
     echo "sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
+    info "NEOVIM:"
+    echo "Run nvim and enter No for default config."
+    echo "To update, use command 'NvChadUpdate'"
 }
 
 pushd $HOME || die chdir
@@ -49,9 +52,8 @@ then
 fi
 
 
-VIMPATHS=".vim .config/nvim"
-RCFILES=".gitconfig .ideavimrc .tmux.conf"
-ALL="$RCFILES $VIMPATHS"
+# general config
+ALL=".gitconfig .ideavimrc .tmux.conf .config/nvim"
 
 info "Backing up existing stuff to .dotfilesbackup"
 rsync -abL $ALL .dotfilesbackup/ || info "Ignoring missing files; new install"
@@ -63,11 +65,10 @@ do
     do_link $f
 done
 
-# Neovim setup
-if [ ! -d "$NVIM_UNDO_DIR" ]; then
-	info "Creating $NVIM_UNDO_DIR"
-	mkdir -p $HOME/.vim/undodir
-fi
+# vim / nvim
+info "Fetching submodule Neovim Chad (NvChad)"
+pushd $DOT_INSTALL_DIR/.config/nvim
+git submodule update --init || die "Failed to update .config/nvim"
 
 print_hints
 popd
