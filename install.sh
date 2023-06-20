@@ -66,13 +66,6 @@ do
 done
 
 
-# vim / nvim
-info "Neovim: Chadifying... (NvChad)"
-pushd $DOT_INSTALL_DIR/.config/nvim
-# XXX should be linked
-info "  Copying in $(pwd)/custom/\*"
-cp -af "$HOME/$DOT_INSTALL_DIR/config-nvim-lua-custom/* lua/custom"
-
 print_hints
 popd
 
