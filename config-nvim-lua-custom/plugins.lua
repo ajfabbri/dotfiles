@@ -1,14 +1,16 @@
 local cmp = require "cmp"
 
+---@type NvPluginSpec[]
 local plugins = {
+
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = {
-        "rust-analyzer",
-      },
-    },
+      ensure_installed = { "rust-analyzer"},
+    }
   },
+
+
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -17,8 +19,22 @@ local plugins = {
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require "plugins.configs.treesitter"
+      require "custom.configs.treesitter"
+    end,
+    opts = {
+        ensure_installed = {
+            "vim", "lua", "typescript", "json", "c", "rust"
+        }
+    }
+  },
+
+  {
     "simrat39/rust-tools.nvim",
     ft = "rust",
+    -- force lspconfig to be loaded before tools
     dependencies = "neovim/nvim-lspconfig",
     opts = function ()
       return require "custom.configs.rust-tools"
@@ -28,11 +44,13 @@ local plugins = {
     end
   },
   {
-    "mfussenegger/nvim-dap",
-    init = function()
-      require("core.utils").load_mappings("dap")
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function ()
+      vim.g.rustfmt_autosave = 1
     end
   },
+
   {
     'saecki/crates.nvim',
     ft = {"toml"},
@@ -47,20 +65,6 @@ local plugins = {
     end,
   },
   {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function ()
-      vim.g.rustfmt_autosave = 1
-    end
-  },
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    lazy = false,
-    config = function(_, opts)
-      require("nvim-dap-virtual-text").setup()
-    end
-  },
-  {
     "hrsh7th/nvim-cmp",
     opts = function()
       local M = require "plugins.configs.cmp"
@@ -72,6 +76,28 @@ local plugins = {
       table.insert(M.sources, {name = "crates"})
       return M
     end,
-  }
+  },
+
+  {
+    import = "custom.configs.extras.copilot"
+  },
+  {
+    import = "custom.configs.extras.trouble"
+  },
+
+  -- To make a plugin not be loaded
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   enabled = false
+  -- },
+
+  -- All NvChad plugins are lazy-loaded by default
+  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
+  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
+  -- {
+  --   "mg979/vim-visual-multi",
+  --   lazy = false,
+  -- }
 }
+
 return plugins

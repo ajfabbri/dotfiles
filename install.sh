@@ -65,10 +65,20 @@ do
     do_link $f
 done
 
+
 # vim / nvim
-info "Fetching submodule Neovim Chad (NvChad)"
+info "Neovim: Chadifying... (NvChad)"
 pushd $DOT_INSTALL_DIR/.config/nvim
-git submodule update --init || die "Failed to update .config/nvim"
+# XXX should be linked
+info "  Copying in $(pwd)/custom/\*"
+cp -af "$HOME/$DOT_INSTALL_DIR/config-nvim-lua-custom/* lua/custom"
 
 print_hints
 popd
+
+# optional AI taking over my job
+if [ "$2" == "copilot" ] ; then
+  # not very secure, but I inspected the script at least.
+  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+  sudo apt-get install -y nodejs
+fi

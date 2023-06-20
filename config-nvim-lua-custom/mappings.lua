@@ -1,30 +1,12 @@
+---@type MappingsTable
 local M = {}
 
-M.dap = {
-  plugin = true,
+M.general = {
   n = {
-    ["<leader>db"] = { "<cmd> DapToggleBreakpoint <CR>" },
-    ["<leader>dus"] = {
-      function ()
-        local widgets = require('dap.ui.widgets');
-        local sidebar = widgets.sidebar(widgets.scopes);
-        sidebar.open();
-      end,
-      "Open debugging sidebar"
-    }
-  }
+    [";"] = { ":", "enter command mode", opts = { nowait = true } },
+  },
 }
 
-M.crates = {
-  plugin = true,
-  n = {
-    ["<leader>rcu"] = {
-      function ()
-        require('crates').upgrade_all_crates()
-      end,
-      "update crates"
-    }
-  }
-}
+-- more keybinds!
 
 return M
