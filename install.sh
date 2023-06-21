@@ -36,9 +36,6 @@ print_hints() {
     echo "cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
     echo "sudo apt install fuse"
     echo "sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
-    info "NEOVIM:"
-    echo "Run nvim and enter No for default config."
-    echo "To update, use command 'NvChadUpdate'"
 }
 
 pushd $HOME || die chdir
@@ -58,6 +55,8 @@ ALL=".gitconfig .ideavimrc .tmux.conf .config/nvim"
 info "Backing up existing stuff to .dotfilesbackup"
 rsync -abL $ALL .dotfilesbackup/ || info "Ignoring missing files; new install"
 rm -r $ALL || info "Ignoring missing files; new install"
+
+mv -f .vimrc .dotfilesbackup
 
 info "Symlinking to new goodness in $DOT_INSTALL_DIR."
 for f in $ALL
