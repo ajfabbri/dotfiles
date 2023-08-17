@@ -34,7 +34,7 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "rust-analyzer", "taplo" })
+        vim.list_extend(opts.ensure_installed, { "codelldb", "rust-analyzer", "taplo" })
       end
     end,
   },
@@ -101,7 +101,7 @@ return {
             local extension_path = codelldb:get_install_path() .. "/extension/"
             local codelldb_path = extension_path .. "adapter/codelldb"
             local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
-              or extension_path .. "lldb/lib/liblldb.so"
+                or extension_path .. "lldb/lib/liblldb.so"
             rust_tools_opts = vim.tbl_deep_extend("force", rust_tools_opts, {
               dap = {
                 adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),

@@ -1,18 +1,5 @@
 return {
 
-  -- uncomment and add lsp servers with their config to servers below
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- sourcekit will be automatically installed with mason and loaded with lspconfig
-        sourcekit = {},
-      },
-    },
-  },
-
   -- uncomment and add tools to ensure_installed below
   {
     "williamboman/mason.nvim",
@@ -32,7 +19,7 @@ return {
   },
 
   -- disable the fancy UI for the debugger
-  { "rcarriga/nvim-dap-ui", enabled = false },
+  { "rcarriga/nvim-dap-ui",                     enabled = false },
 
   -- which key integration
   {
@@ -40,11 +27,12 @@ return {
     opts = {
       defaults = {
         ["<leader>dw"] = { name = "+widgets" },
+
       },
     },
   },
 
-  -- dap integration
+  --[[] dap integration
   {
     "mfussenegger/nvim-dap",
     keys = {
@@ -81,16 +69,18 @@ return {
     opts = function(_, opts)
       require("dap").defaults.fallback.terminal_win_cmd = "enew | set filetype=dap-terminal"
     end,
-  },
+  }, ]] --
 
   -- core language specific extension modules
-  { import = "lazyvim.plugins.extras.lang.typescript" },
+  --  { import = "lazyvim.plugins.extras.lang.typescript"},
   { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.dap.nlua" },
+  --  { import = "lazyvim.plugins.extras.lang.go" },
+  --  { import = "lazyvim.plugins.extras.dap.nlua" },
 
   -- custom language specific extension modules
   { import = "plugins.extras.lang.java" },
   { import = "plugins.extras.lang.rust" },
-  { import = "plugins.extras.lang.nodejs" },
+  { import = "plugins.extras.lang.python" },
+  { import = "plugins.extras.lang.clangd" },
+  --  { import = "plugins.extras.lang.nodejs" },
 }
