@@ -33,9 +33,10 @@ do_link() {
 print_hints() {
     info "Finished install."
     echo "You should also make sure you have a recent version of neovim, e.g:"
-    echo "cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-    echo "sudo apt install fuse"
-    echo "sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
+    echo "  cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
+    echo "  sudo apt install fuse"
+    echo "  sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
+    echo "And install apt packages for fd-find ripgrep clangd clang"
 }
 
 pushd $HOME || die chdir
