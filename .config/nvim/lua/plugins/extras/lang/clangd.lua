@@ -32,6 +32,22 @@ return {
         clangd = {
           keys = {
             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            { "gD",         vim.lsp.buf.declaration,             mode = "n" },
+            { "gd",         vim.lsp.buf.definition,              mode = "n" },
+            { "gi",         vim.lsp.buf.implementation,          mode = "n" },
+            { "gr",         vim.lsp.buf.references,              mode = "n" },
+            { "<leader>D",  vim.lsp.buf.type_definition,         mode = "n" },
+            { "K",          vim.lsp.buf.hover,                   mode = "n" },
+            { "<C-k>",      vim.lsp.buf.signature_help,          mode = "n" },
+            { "<leader>wa", vim.lsp.buf.add_workspace_folder,    mode = "n" },
+            { "<leader>wr", vim.lsp.buf.remove_workspace_folder, mode = "n" },
+            { "<leader>wl", vim.lsp.buf.list_workspace_folders,  mode = "n" },
+            { "<leader>rn", vim.lsp.buf.rename,                  mode = "n" },
+            { "<leader>ca", vim.lsp.buf.code_action,             mode = "n" },
+          },
+          { "<leader>f", function()
+            vim.lsp.buf.format { async = true }
+          end
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
@@ -118,7 +134,7 @@ return {
             request = "launch",
             name = "Launch file",
             program = function()
-              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+              return vim.fn.input("Path to executable: " .. vim.fn.getcwd() .. "/" .. "file")
             end,
             cwd = "${workspaceFolder}",
           },
