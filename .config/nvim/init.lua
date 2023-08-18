@@ -1,3 +1,4 @@
+vim.g.mapleader = ' '
 
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -58,6 +59,8 @@ require('lazy').setup({
 })
 
 -- Configuration
+
+-- lsp-zero
 local lsp = require('lsp-zero').preset({})
 lsp.set_sign_icons({
   error = '✘',
@@ -69,7 +72,13 @@ lsp.set_sign_icons({
 lsp.on_attach(function(_client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
+  local opt = { buffer = true }
   lsp.default_keymaps({buffer = bufnr})
+  vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opt)
+  vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opt)
+  vim.keymap.set({'n', 'x'}, '<leader>fb', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opt)
+  vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opt)
+
 end)
 
 lsp.setup()
