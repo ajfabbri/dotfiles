@@ -55,7 +55,12 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
       dependencies = { 'nvim-lua/plenary.nvim' }
-  }
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {'nvim-tree/nvim-web-devicons'}
+  },
+
 })
 
 -- Configuration
@@ -88,6 +93,9 @@ lsp.setup()
 require'lspconfig'.clangd.setup{
 	cmd = {"clangd-15"},
 }
+
+-- lualine
+require('lualine').setup()
 
 -- General options
 vim.opt.termguicolors = true
