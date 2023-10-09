@@ -25,7 +25,7 @@ require('lazy').setup({
   -- lspzero
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
     dependencies = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},             -- Required
@@ -66,7 +66,7 @@ require('lazy').setup({
 -- Configuration
 
 -- lsp-zero
-local lsp = require('lsp-zero').preset({})
+local lsp = require('lsp-zero')
 lsp.set_sign_icons({
   error = '✘',
   warn = '▲',
@@ -85,9 +85,32 @@ lsp.on_attach(function(_client, bufnr)
   vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opt)
 
 end)
-
-lsp.setup()
 -- end lsp-zero setup
+
+-- mason
+require('mason').setup({})
+require('mason-lspconfig').setup({
+	ensure_installed = { 'tsserver', 'rust_analyzer' },
+	handlers = {
+		lsp.default_setup,
+		lua_ls = function()
+			local lua_opts = lsp.nvim_lua_ls()
+			require('lspconfig').lus_ls.setup(lua_opts)
+		end,
+	},
+})
+
+-- CMP
+local cmp = require('cmp')
+local cmp_format = require('lsp-zero').cmp_format()
+cmp.setup({
+	formatting = cmp_format,
+	mapping = cmp.mapping.preset.insert({
+		-- Scroll doc window
+		['<C-u>'] = cmp.mapping.scroll_docs(-4),
+		['<C-d>'] = cmp.mapping.scroll_docs(4),
+	}),
+})
 
 -- More LSP stuff
 require'lspconfig'.clangd.setup{
