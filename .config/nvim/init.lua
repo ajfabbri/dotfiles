@@ -61,6 +61,10 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     dependencies = {'nvim-tree/nvim-web-devicons'}
   },
+  -- rust tools
+  {
+    "simrat39/rust-tools.nvim",
+  },
   -- copilot
   {
     "zbirenbaum/copilot.lua",
@@ -107,6 +111,16 @@ lsp.on_attach(function(_client, bufnr)
 end)
 -- end lsp-zero setup
 
+-- rust tools
+local rust_tools = require('rust-tools')
+rust_tools.setup({
+	server = {
+		on_attach = function(_client, bufnr)
+			vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
+		end
+	},
+})
+
 -- mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -117,6 +131,8 @@ require('mason-lspconfig').setup({
 			local lua_opts = lsp.nvim_lua_ls()
 			require('lspconfig').lus_ls.setup(lua_opts)
 		end,
+		-- let rust-tools do this part
+		rust_analyzer = function () end
 	},
 })
 
