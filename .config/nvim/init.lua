@@ -56,10 +56,19 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
       dependencies = { 'nvim-lua/plenary.nvim' }
   },
+  -- lualine
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {'nvim-tree/nvim-web-devicons'}
   },
+  -- copilot
+  {
+    "zbirenbaum/copilot.lua",
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+  },
+
 
 })
 
@@ -100,15 +109,29 @@ require('mason-lspconfig').setup({
 	},
 })
 
+-- copilot
+require('copilot').setup({
+	suggestion = {enabled = false},
+	panel = {enabled = false},
+})
+
 -- CMP
 local cmp = require('cmp')
 local cmp_format = require('lsp-zero').cmp_format()
 cmp.setup({
+	sources = {
+		{name = 'copilot'},
+		{name = 'nvim_lsp'},
+	},
 	formatting = cmp_format,
 	mapping = cmp.mapping.preset.insert({
 		-- Scroll doc window
 		['<C-u>'] = cmp.mapping.scroll_docs(-4),
 		['<C-d>'] = cmp.mapping.scroll_docs(4),
+		['<CR>'] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = false,
+		}),
 	}),
 })
 

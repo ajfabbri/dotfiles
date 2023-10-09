@@ -71,7 +71,5 @@ popd
 
 # optional AI taking over my job
 if [ "$2" == "copilot" ] ; then
-  # not very secure, but I inspected the script at least.
-  curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
-  sudo apt-get install -y nodejs
+	echo "*** You need to install node.js: https://nodejs.org/en/download ***"
 fi
