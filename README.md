@@ -27,3 +27,11 @@ dotfiles/install.sh
 | gl         | goto list of diagnostics |
 | [d         | previous diag. |
 | ]d         | next diag. |
+| \<C-y\> or \<CR\>?  | confirm selection |
+| \<C-e\>     | cancel completion |
+| \<Down\>     | Next item |
+| \<Up\>     | Prev item |
+| \<C-n\>     | Trigger completion / next item |
+| \<C-p\>     | Trigger completion / prev item |
+| \<C-u\>     | Scroll doc window up|
+| \<C-d\>     | Scroll doc window down|
