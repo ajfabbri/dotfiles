@@ -14,9 +14,17 @@ dotfiles/install.sh
 | Key(s)     | Binding         |
 | ---------- | --------------- |
 | gr | goto References (telescope) |
-| <leader>rn | Rename (lsp) |
-| <leader>fb | Format Buffer (lsp) |
-| <leader>ca | Code Action (lsp) |
+| \<leader\>ff | Find File (telescope) |
+| \<leader\>ft | find File Text (telescope) |
+| \<leader\>fr | File Recents (telescope) |
+| \<leader\>sh | Search help (telescope) |
+| \<leader\>sm | Search man pages (telescope) |
+| \<leader\>sr | Search registers (telescope) |
+| \<leader\>sk | Search keymaps (telescope) |
+| \<leader\>sk | Search commands (telescope) |
+| \<leader\>rn | Rename (lsp) |
+| \<leader\>fb | Format Buffer (lsp) |
+| \<leader\>ca | Code Action (lsp) |
 | K          | lsp hover |
 | gd         | goto definition |
 | gD         | goto declaration |

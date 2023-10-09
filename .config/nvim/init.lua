@@ -171,6 +171,9 @@ require'lspconfig'.clangd.setup{
 -- lualine
 require('lualine').setup()
 
+-- additional key mappings
+require('custom.whichkey')
+
 -- General options
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight')
