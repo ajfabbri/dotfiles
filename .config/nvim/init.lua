@@ -88,6 +88,17 @@ lsp.on_attach(function(_client, bufnr)
   -- to learn the available actions
   local opt = { buffer = true }
   lsp.default_keymaps({buffer = bufnr})
+  -- Defaults:
+  -- K lsp hover
+  -- gd	goto definition
+  -- gD goto declaration
+  -- gi list implementations
+  -- go goto type definition of obj under cursor
+  -- gr list references
+  -- gs list signature
+  -- gl Show diagnostics floating window
+  -- [d goto previous diag.
+  -- ]d goto next diag.
   vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opt)
   vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opt)
   vim.keymap.set({'n', 'x'}, '<leader>fb', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opt)
@@ -122,6 +133,7 @@ cmp.setup({
 	sources = {
 		{name = 'copilot'},
 		{name = 'nvim_lsp'},
+		{name = 'path'},
 	},
 	formatting = cmp_format,
 	mapping = cmp.mapping.preset.insert({

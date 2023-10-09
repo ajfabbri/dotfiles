@@ -17,3 +17,13 @@ dotfiles/install.sh
 | <leader>rn | Rename (lsp) |
 | <leader>fb | Format Buffer (lsp) |
 | <leader>ca | Code Action (lsp) |
+| K          | lsp hover |
+| gd         | goto definition |
+| gD         | goto declaration |
+| gi         | goto implemenations |
+| go         | goto type defn of obj. |
+| gr         | goto references |
+| gs         | goto signature |
+| gl         | goto list of diagnostics |
+| [d         | previous diag. |
+| ]d         | next diag. |
