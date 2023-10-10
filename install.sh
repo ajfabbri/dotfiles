@@ -51,7 +51,7 @@ fi
 
 
 # general config
-ALL=".gitconfig .ideavimrc .tmux.conf .config/nvim .zshrc .bashrc .profile"
+ALL=".gitconfig .ideavimrc .tmux.conf .config/nvim .zshrc .bashrc .profile .editorconfig"
 
 info "Backing up existing stuff to .dotfilesbackup"
 rsync -abL $ALL .dotfilesbackup/ || info "Ignoring missing files; new install"
