@@ -20,3 +20,5 @@ unset MANPATH
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
+# wezterm on mac with tmux seemed to need this?
+stty icrnl
