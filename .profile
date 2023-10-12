@@ -4,9 +4,10 @@ alias vim="nvim"
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
 
+export EDITOR=vim
+
 #gpg
 export GPG_TTY=$(tty)
-
 
 # work
 ulimit -n 4096

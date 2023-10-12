@@ -3,3 +3,4 @@
 .netrwhist
 /doc/tags
 lazy-lock.json
+.luarc.json
