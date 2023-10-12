@@ -60,6 +60,8 @@ require('lazy').setup({
     },
     -- rust tools
     { "simrat39/rust-tools.nvim", },
+    -- gitsigns
+    { "lewis6991/gitsigns.nvim", },
     -- copilot
     { "zbirenbaum/copilot.lua", },
     { "zbirenbaum/copilot-cmp", },
@@ -110,6 +112,9 @@ rust_tools.setup({
         end
     },
 })
+
+-- git signs
+require('gitsigns').setup()
 
 -- mason
 require('mason').setup({})
