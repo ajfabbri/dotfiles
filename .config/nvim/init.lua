@@ -1,4 +1,5 @@
 vim.g.mapleader = ' '
+vim.wo.relativenumber = true
 
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
