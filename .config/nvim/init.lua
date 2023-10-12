@@ -23,21 +23,16 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   {'folke/tokyonight.nvim'},
   -- lspzero
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {'williamboman/mason.nvim'},           -- Optional
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+  { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x', },
+  -- LSP Support
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
+  {'neovim/nvim-lspconfig'},
 
-      -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
-    }
-  },
+  -- Autocompletion
+  {'hrsh7th/nvim-cmp'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'L3MON4D3/LuaSnip'},
   -- whichkey
   {
 	"folke/which-key.nvim",
@@ -124,12 +119,12 @@ rust_tools.setup({
 -- mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = { 'tsserver', 'rust_analyzer' },
+	ensure_installed = {'lua_ls', 'tsserver', 'rust_analyzer' },
 	handlers = {
 		lsp.default_setup,
 		lua_ls = function()
 			local lua_opts = lsp.nvim_lua_ls()
-			require('lspconfig').lus_ls.setup(lua_opts)
+			require('lspconfig').lua_ls.setup(lua_opts)
 		end,
 		-- let rust-tools do this part
 		rust_analyzer = function () end
