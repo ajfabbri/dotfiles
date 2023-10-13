@@ -2,10 +2,11 @@ local wk = require("which-key")
 local gs = require("gitsigns")
 wk.register({
   f = {
-    name = "file", -- optional group name
+    name = "file/find/format", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
     t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern In All Files" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    b = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format Buffer" },
   },
 
   s = {
@@ -30,7 +31,7 @@ wk.register({
         D = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "goto Declaration"},
         i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "goto Obj definition"},
         o = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "goto Obj definition"},
-        r = {"<cmd>lua vim.lsp.buf.references()<cr>", "goto Obj definition"},
+        r = {"<cmd>lua vim.lsp.buf.references()<cr>", "goto References"},
         s = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "goto Signature help"},
         l = {"<cmd>lua vim.diagnostic.open_float()<cr>", "List of diagnostics"},
     },

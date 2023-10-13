@@ -97,9 +97,7 @@ lsp.on_attach(function(_client, bufnr)
     -- gl Show diagnostics floating window
     -- [d goto previous diag.
     -- ]d goto next diag.
-    vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opt)
     vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opt)
-    vim.keymap.set({ 'n', 'x' }, '<leader>fb', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opt)
     vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opt)
 end)
 
