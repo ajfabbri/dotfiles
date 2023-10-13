@@ -22,3 +22,19 @@ wk.register({
     t = {gs.toggle_current_line_blame, "Git Toggle Blame"},
   },
 }, { prefix = "<leader>" })
+
+wk.register({
+    g = {
+        name = "goto / LSP",
+        d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "goto definition"},
+        D = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "goto Declaration"},
+        i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "goto Obj definition"},
+        o = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "goto Obj definition"},
+        r = {"<cmd>lua vim.lsp.buf.references()<cr>", "goto Obj definition"},
+        s = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "goto Signature help"},
+        l = {"<cmd>lua vim.diagnostic.open_float()<cr>", "List of diagnostics"},
+    },
+    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "prev Diagnostic" },
+    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "next Diagnostic" },
+
+})
