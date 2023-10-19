@@ -97,8 +97,6 @@ lsp.on_attach(function(_client, bufnr)
     -- gl Show diagnostics floating window
     -- [d goto previous diag.
     -- ]d goto next diag.
-    vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opt)
-    vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opt)
 end)
 
 lsp.setup_servers({'tsserver', 'rust_analyzer'})

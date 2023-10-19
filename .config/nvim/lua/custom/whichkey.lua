@@ -1,5 +1,6 @@
 local wk = require("which-key")
 local gs = require("gitsigns")
+
 wk.register({
   f = {
     name = "file/find/format", -- optional group name
@@ -27,15 +28,17 @@ wk.register({
 wk.register({
     g = {
         name = "goto / LSP",
+        c = {"<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "goto Callers"},
         d = {"<cmd>lua vim.lsp.buf.definition()<cr>", "goto definition"},
         D = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "goto Declaration"},
-        i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "goto Obj definition"},
-        o = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "goto Obj definition"},
+        i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "goto Implementation"},
+        t = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "goto Type definition"},
         r = {"<cmd>lua vim.lsp.buf.references()<cr>", "goto References"},
         s = {"<cmd>lua vim.lsp.buf.signature_help()<cr>", "goto Signature help"},
         l = {"<cmd>lua vim.diagnostic.open_float()<cr>", "List of diagnostics"},
     },
     ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "prev Diagnostic" },
     ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "next Diagnostic" },
-
-})
+    ['cr'] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Code Rename" },
+    ['ca'] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+}, {prefix = "<leader>"})
