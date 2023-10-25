@@ -75,6 +75,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export PATH=$HOME/bin:$PATH
+
 # shellcheck source=.profile
 source $HOME/.profile
 eval "$(direnv hook bash)"
