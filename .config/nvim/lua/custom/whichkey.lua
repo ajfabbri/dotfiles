@@ -4,7 +4,8 @@ local gs = require("gitsigns")
 wk.register({
   f = {
     name = "file/find/format", -- optional group name
-    f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+    f = { "<cmd>Telescope find_files<cr>", "File" }, -- create a binding with label
+    h = { "<cmd>Telescope find_files hidden=true<cr>", "Hidden files" }, -- create a binding with label
     t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern In All Files" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     b = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format Buffer" },
@@ -12,7 +13,7 @@ wk.register({
 
   s = {
     name = "Search",
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    h = { "<cmd>Telescope help_tags<cr>", "Help" },
     m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
