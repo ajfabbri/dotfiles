@@ -1,5 +1,8 @@
 vim.g.mapleader = ' '
 vim.wo.relativenumber = true
+-- highlight trailing whitespace
+-- TODO this--if it would higlight Errors, and remove better whitespace dependency
+-- vim.fn.matchadd('errorMsg', [[\s\+$]])
 
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -23,6 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require('lazy').setup({
     { 'folke/tokyonight.nvim' },
+    { 'ntpeters/vim-better-whitespace' },
     -- lspzero
     { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', },
     -- LSP Support
