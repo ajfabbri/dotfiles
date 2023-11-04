@@ -13,6 +13,7 @@ wk.register({
 
   s = {
     name = "Search",
+    p = { "<cmd>Telescope pickers<cr>", "prev Pickers" },
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
     m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope registers<cr>", "Registers" },
