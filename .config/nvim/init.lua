@@ -34,10 +34,17 @@ require('lazy').setup({
     { 'williamboman/mason-lspconfig.nvim' },
     { 'neovim/nvim-lspconfig' },
 
-    -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },
+    -- Autocompletion and snippets
     { 'hrsh7th/cmp-nvim-lsp' },
-    { 'L3MON4D3/LuaSnip' },
+    { 'hrsh7th/nvim-cmp' },
+    --{ 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-path' },
+    --{ 'hrsh7th/cmp-cmdline' },
+
+    -- preferred snip impl w/ lsp-zero
+    {'L3MON4D3/LuaSnip'},
+    --{ 'onsails/lspkind-nvim' },
+
     -- whichkey
     {
         "folke/which-key.nvim",
@@ -77,19 +84,18 @@ require('lazy').setup({
 require('custom.whichkey')
 
 -- lsp-zero
-local lsp = require('lsp-zero')
-lsp.set_sign_icons({
+local lspz = require('lsp-zero')
+lspz.set_sign_icons({
     error = '✘',
     warn = '▲',
     hint = '⚑',
     info = '»'
 })
 
-lsp.on_attach(function(_client, bufnr)
+lspz.on_attach(function(_client, bufnr)
     -- see :help lsp-zero-keybindings
     -- to learn the available actions
-    local opt = { buffer = true }
-    lsp.default_keymaps({ buffer = bufnr })
+    lspz.default_keymaps({ buffer = bufnr })
     -- Defaults:
     -- K lsp hover
     -- gd	goto definition
@@ -103,7 +109,10 @@ lsp.on_attach(function(_client, bufnr)
     -- ]d goto next diag.
 end)
 
-lsp.setup_servers({'tsserver', 'rust_analyzer'})
+lspz.setup_servers({'tsserver', 'rust_analyzer'})
+require 'lspconfig'.clangd.setup {
+    cmd = { "clangd-15" },
+}
 -- end lsp-zero setup
 
 -- rust tools
@@ -124,9 +133,9 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = { 'lua_ls', 'tsserver', 'rust_analyzer' },
     handlers = {
-        lsp.default_setup,
+        lspz.default_setup,
         lua_ls = function()
-            local lua_opts = lsp.nvim_lua_ls()
+            local lua_opts = lspz.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
         -- let rust-tools do this part
@@ -162,10 +171,6 @@ cmp.setup({
     }),
 })
 
--- More LSP stuff
-require 'lspconfig'.clangd.setup {
-    cmd = { "clangd-15" },
-}
 
 -- lualine
 require('lualine').setup()
