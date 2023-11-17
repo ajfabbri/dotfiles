@@ -84,7 +84,7 @@ require('lazy').setup({
 require('custom.whichkey')
 
 -- lsp-zero
-local lspz = require('lsp-zero')
+local lspz = require('lsp-zero').preset({})
 lspz.set_sign_icons({
     error = '✘',
     warn = '▲',
@@ -113,6 +113,7 @@ lspz.setup_servers({'tsserver', 'rust_analyzer'})
 require 'lspconfig'.clangd.setup {
     cmd = { "clangd-15" },
 }
+lspz.setup()
 -- end lsp-zero setup
 
 -- rust tools
