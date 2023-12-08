@@ -132,7 +132,7 @@ require('gitsigns').setup()
 -- mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'tsserver', 'rust_analyzer' },
+    ensure_installed = { 'lua_ls', 'tsserver', 'rust_analyzer', 'pyright' },
     handlers = {
         lspz.default_setup,
         lua_ls = function()
@@ -143,6 +143,8 @@ require('mason-lspconfig').setup({
         rust_analyzer = function() end
     },
 })
+-- pyright
+require'lspconfig'.pyright.setup{}
 
 -- copilot
 require('copilot').setup({
