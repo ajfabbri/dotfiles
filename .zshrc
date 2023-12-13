@@ -1,5 +1,5 @@
 eval "$(direnv hook zsh)"
-source .profile
+source $HOME/.profile
 bindkey -e
 
 # wezterm on mac with tmux seemed to need this?
