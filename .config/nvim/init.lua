@@ -78,6 +78,8 @@ require('lazy').setup({
     -- copilot
     { "zbirenbaum/copilot.lua", },
     { "zbirenbaum/copilot-cmp", },
+    -- neoformat
+    { "sbdchd/neoformat", },
 })
 
 -- Configuration
@@ -173,6 +175,9 @@ require('copilot').setup({
     },
 })
 require('copilot_cmp').setup()
+
+-- neoformat
+vim.g.neoformat_try_node_exe = 1
 
 -- CMP
 local cmp = require('cmp')
