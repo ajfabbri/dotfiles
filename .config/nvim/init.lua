@@ -73,6 +73,8 @@ require('lazy').setup({
     { "simrat39/rust-tools.nvim", },
     -- gitsigns
     { "lewis6991/gitsigns.nvim", },
+    -- nvim-lint
+    { "mfussenegger/nvim-lint", },
     -- copilot
     { "zbirenbaum/copilot.lua", },
     { "zbirenbaum/copilot-cmp", },
@@ -150,6 +152,25 @@ require'lspconfig'.pyright.setup{}
 require('copilot').setup({
     suggestion = { enabled = false },
     panel = { enabled = false },
+    filetypes = {
+        markdown = true,
+        typescript = true,
+        javascript = true,
+        rust = true,
+        c = true,
+        cpp = true,
+        python = true,
+        lua = true,
+        go = true,
+        yaml = true,
+        sh = function()
+            if string.match(vim.fn.basname(vim.fn.nvim_buf_get_name(0)), '^%.env.*') then
+                -- disable for .env files
+                return false
+            end
+            return true
+        end,
+    },
 })
 require('copilot_cmp').setup()
 
@@ -174,6 +195,17 @@ cmp.setup({
     }),
 })
 
+-- nvim-lint
+require('lint').linters_by_ft = {
+    python = { 'flake8' },
+    typescript = { 'eslint' },
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
 
 -- lualine
 require('lualine').setup()
