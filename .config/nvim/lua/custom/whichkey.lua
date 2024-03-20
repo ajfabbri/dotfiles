@@ -9,6 +9,8 @@ wk.register({
     t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern In All Files" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     b = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format Buffer" },
+    p = { "<cmd>Telescope resume<cr>", "Previous (resume)" },
+    k = { "<cmd>Telescope pickers<cr>", "Pickers" },
   },
 
   s = {
