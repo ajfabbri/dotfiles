@@ -5,7 +5,8 @@ wk.register({
   f = {
     name = "file/find/format", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "File" }, -- create a binding with label
-    h = { "<cmd>Telescope find_files hidden=true<cr>", "Hidden files" }, -- create a binding with label
+    -- h = { "<cmd>Telescope find_files hidden=true<cr>", "Hidden files" }, -- create a binding with label
+    h = { "<cmd>Telescope find_files find_command=rg,--files,--no-ignore,--hidden,-g,!.git,-g,!target/**<cr>", "Hidden files" },
     t = { "<cmd>Telescope live_grep <cr>", "Find Text Pattern In All Files" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     b = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format Buffer" },
