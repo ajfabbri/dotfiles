@@ -1,8 +1,15 @@
+local vim = vim
+local opt = vim.opt
 vim.g.mapleader = ' '
 vim.wo.relativenumber = true
+opt.foldmethod = "syntax"
+
 -- highlight trailing whitespace
 -- TODO this--if it would higlight Errors, and remove better whitespace dependency
 -- vim.fn.matchadd('errorMsg', [[\s\+$]])
+
+-- Detect .avsc files as JSON
+vim.cmd([[autocmd BufRead,BufNewFile *.avsc set filetype=json]])
 
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -69,8 +76,6 @@ require('lazy').setup({
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
-    -- rust tools
-    { "simrat39/rust-tools.nvim", },
     -- gitsigns
     { "lewis6991/gitsigns.nvim", },
     -- nvim-lint
@@ -120,16 +125,6 @@ require 'lspconfig'.clangd.setup {
 lspz.setup()
 -- end lsp-zero setup
 
--- rust tools
-local rust_tools = require('rust-tools')
-rust_tools.setup({
-    server = {
-        on_attach = function(_client, bufnr)
-            vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-        end
-    },
-})
-
 -- git signs
 require('gitsigns').setup()
 
@@ -143,8 +138,9 @@ require('mason-lspconfig').setup({
             local lua_opts = lspz.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
-        -- let rust-tools do this part
-        rust_analyzer = function() end
+        rust_analyzer = function()
+            require('lspconfig').rust_analyzer.setup({})
+        end,
     },
 })
 -- pyright
@@ -213,7 +209,11 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 -- lualine
-require('lualine').setup()
+require('lualine').setup {
+    sections = {
+        lualine_c = { { 'filename', path = 3, } },
+    }
+}
 
 -- General options
 vim.opt.termguicolors = true
