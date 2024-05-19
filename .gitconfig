@@ -1,24 +1,23 @@
 [user]
-	name = Aaron Fabbri
-	email = ajfabbri@gmail.com
+        name = Aaron Fabbri
+        email = aaron.fabbri@ditto.live
+        signingkey = 8772CD172D8042D2A50EBC271BD756BBA35F8AF8
 [push]
-	default = current
+        default = current
 [alias]
-	d = diff
-	dc = diff --cached
+        d = diff
+        dc = diff --cached
         lg =  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)\
             - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- \
             %an%C(reset)%C(bold yellow)%d%C(reset)' --all
         s = status
         sw = switch
 [pull]
-	ff = only
-[diff]
-    guitool = vscode
-[difftool "vscode"]
-    cmd = code --wait --diff $LOCAL $REMOTE
+        ff = only
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
+[commit]
+        gpgsign = true
