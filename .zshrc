@@ -3,6 +3,8 @@ alias ta="tmux attach"
 alias vim="nvim"
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
+alias treeg='tree --gitignore'
+alias treed='tree -d --gitignore'
 
 export EDITOR=vim
 
@@ -23,6 +25,9 @@ export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
 eval "$(direnv hook zsh)"
 bindkey -e
+
+# brew-installed python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # wezterm on mac with tmux seemed to need this?
 stty icrnl
