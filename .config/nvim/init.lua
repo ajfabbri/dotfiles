@@ -32,7 +32,18 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require('lazy').setup({
+    -- color schemes
     { 'folke/tokyonight.nvim' },
+    { 'gilgigilgil/anderson.vim' },
+    {
+        'uloco/bluloco.nvim',
+        lazy = false,
+        priority = 1000,
+        dependencies = { 'rktjmp/lush.nvim' },
+        config = function()
+            -- your optional config goes here, see below.
+        end,
+    },
     { 'ntpeters/vim-better-whitespace' },
     -- lspzero
     { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', },
@@ -40,6 +51,9 @@ require('lazy').setup({
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
     { 'neovim/nvim-lspconfig' },
+
+    -- Rust-specific
+    { 'mrcjkb/rustaceanvim',              version = '^4',  lazy = false, }, -- This plugin is already lazy
 
     -- Autocompletion and snippets
     { 'hrsh7th/cmp-nvim-lsp' },
@@ -49,7 +63,7 @@ require('lazy').setup({
     --{ 'hrsh7th/cmp-cmdline' },
 
     -- preferred snip impl w/ lsp-zero
-    {'L3MON4D3/LuaSnip'},
+    { 'L3MON4D3/LuaSnip' },
     --{ 'onsails/lspkind-nvim' },
 
     -- whichkey
@@ -85,6 +99,13 @@ require('lazy').setup({
     { "zbirenbaum/copilot-cmp", },
     -- neoformat
     { "sbdchd/neoformat", },
+    -- Comment.nvim
+    { "numToStr/Comment.nvim", },
+    -- figlet.nvim
+    {
+        "pavanbhat1999/figlet.nvim",
+		dependencies = "numToStr/Comment.nvim",
+    },
 })
 
 -- Configuration
@@ -118,7 +139,25 @@ lspz.on_attach(function(_client, bufnr)
     -- ]d goto next diag.
 end)
 
-lspz.setup_servers({'tsserver', 'rust_analyzer'})
+vim.g.rustaceanvim = {
+    server = {
+        capabilities = lspz.get_capabilities(),
+    },
+    server = {
+        on_attach = function(client, bufnr)
+            lspz.on_attach(client, bufnr)
+            -- you can also put keymaps here
+        end,
+        -- see also rust-analyzer.json in project root
+        default_settings = {
+            ['rust-analyzer'] = {
+
+            }
+        }
+    }
+}
+
+lspz.setup_servers({ 'tsserver' })
 require 'lspconfig'.clangd.setup {
     cmd = { "clangd-15" },
 }
@@ -131,20 +170,21 @@ require('gitsigns').setup()
 -- mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'tsserver', 'rust_analyzer', 'pyright' },
+    ensure_installed = { 'lua_ls', 'tsserver', 'pyright' },
     handlers = {
-        lspz.default_setup,
         lua_ls = function()
             local lua_opts = lspz.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
-        rust_analyzer = function()
-            require('lspconfig').rust_analyzer.setup({})
+        function(server_name)
+            require('lspconfig')[server_name].setup({})
         end,
-    },
+        rust_analyzer = lspz.noop,
+    }
 })
+
 -- pyright
-require'lspconfig'.pyright.setup{}
+require 'lspconfig'.pyright.setup {}
 
 -- copilot
 require('copilot').setup({
@@ -203,9 +243,9 @@ require('lint').linters_by_ft = {
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
+    callback = function()
+        require("lint").try_lint()
+    end,
 })
 
 -- lualine
@@ -214,7 +254,14 @@ require('lualine').setup {
         lualine_c = { { 'filename', path = 3, } },
     }
 }
+-- Comment.nvim
+require('Comment').setup()
+-- figlet.nvim
+-- require('figlet').Config({
+-- font = '3d',
+-- })
 
 -- General options
 vim.opt.termguicolors = true
-vim.cmd.colorscheme('tokyonight')
+--vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme('bluloco')
