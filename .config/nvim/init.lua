@@ -144,8 +144,6 @@ end)
 vim.g.rustaceanvim = {
     server = {
         capabilities = lspz.get_capabilities(),
-    },
-    server = {
         on_attach = function(client, bufnr)
             lspz.on_attach(client, bufnr)
             -- you can also put keymaps here
@@ -159,7 +157,7 @@ vim.g.rustaceanvim = {
     }
 }
 
-lspz.setup_servers({ 'tsserver' })
+lspz.setup_servers({ 'ts_ls' })
 require 'lspconfig'.clangd.setup {
     cmd = { "clangd-15" },
 }
@@ -172,7 +170,7 @@ require('gitsigns').setup()
 -- mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'tsserver', 'pyright' },
+    ensure_installed = { 'lua_ls', 'ts_ls', 'pyright' },
     handlers = {
         lua_ls = function()
             local lua_opts = lspz.nvim_lua_ls()
