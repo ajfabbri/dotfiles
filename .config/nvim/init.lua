@@ -1,8 +1,8 @@
 local vim = vim
-local opt = vim.opt
 vim.g.mapleader = ' '
 vim.wo.relativenumber = true
-opt.foldmethod = "syntax"
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 -- highlight trailing whitespace
 -- TODO this--if it would higlight Errors, and remove better whitespace dependency
@@ -45,6 +45,8 @@ require('lazy').setup({
         end,
     },
     { 'ntpeters/vim-better-whitespace' },
+    -- treesitter
+    {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
     -- lspzero
     { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', },
     -- LSP Support
