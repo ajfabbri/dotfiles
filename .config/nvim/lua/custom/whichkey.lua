@@ -2,6 +2,7 @@ local wk = require("which-key")
 local gs = require("gitsigns")
 
 wk.register({
+lr = { "<cmd>RustAnalyzer restart<cr>", "Lsp Rust analyzer restart"},
   f = {
     name = "file/find/format", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "File" }, -- create a binding with label
