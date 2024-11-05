@@ -1,7 +1,7 @@
 [user]
         name = Aaron Fabbri
-        email = aaron.fabbri@ditto.live
-        signingkey = 8772CD172D8042D2A50EBC271BD756BBA35F8AF8
+        email = 558234+ajfabbri@users.noreply.github.com
+        igningkey = D20ECC62396A35406F07794DF9C86AA39D03B98A
 [push]
         default = current
 [alias]
