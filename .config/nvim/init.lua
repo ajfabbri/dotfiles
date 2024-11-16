@@ -266,3 +266,6 @@ require('Comment').setup()
 vim.opt.termguicolors = true
 --vim.cmd.colorscheme('tokyonight')
 vim.cmd.colorscheme('bluloco')
+-- better whitespace trim on sae
+vim.g.strip_whitespace_on_save = 1
+vim.g.strip_whitespace_confirm = 0
