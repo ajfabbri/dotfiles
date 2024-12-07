@@ -60,6 +60,7 @@ rm -r $ALL || info "Ignoring missing files; new install"
 mv -f .vimrc .dotfilesbackup
 
 info "Symlinking to new goodness in $DOT_INSTALL_DIR."
+mkdir $HOME/.config || info "Ignoring existing .config dir"
 for f in $ALL
 do
     do_link $f
