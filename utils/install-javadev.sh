@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y unzip direnv openjdk-21-jdk-headless ripgrep nodejs
+sudo apt install -y unzip direnv openjdk-21-jdk-headless ripgrep nodejs npm
 
 # todo idempotent
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc

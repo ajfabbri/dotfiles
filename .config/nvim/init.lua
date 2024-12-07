@@ -58,6 +58,9 @@ require('lazy').setup({
     -- Rust-specific
     { 'mrcjkb/rustaceanvim',              version = '^4',  lazy = false, }, -- This plugin is already lazy
 
+    -- Java
+    {'nvim-java/nvim-java'},
+
     -- Autocompletion and snippets
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
@@ -113,6 +116,9 @@ require('lazy').setup({
 
 -- Configuration
 
+-- context-sensitive mappings
+require('custom.java')
+
 -- additional key mappings
 require('custom.whichkey')
 
@@ -157,8 +163,11 @@ vim.g.rustaceanvim = {
         }
     }
 }
+-- pre-lspconfig init
+require('java').setup()
 
 lspz.setup_servers({ 'ts_ls' })
+require('lspconfig').jdtls.setup({})
 require 'lspconfig'.clangd.setup {
     cmd = { "clangd-15" },
 }
@@ -195,6 +204,7 @@ require('copilot').setup({
         markdown = true,
         typescript = true,
         javascript = true,
+        java = true,
         rust = true,
         c = true,
         cpp = true,
