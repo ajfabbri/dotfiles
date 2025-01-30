@@ -1,7 +1,10 @@
 [user]
         name = Aaron Fabbri
         email = 558234+ajfabbri@users.noreply.github.com
-        igningkey = D20ECC62396A35406F07794DF9C86AA39D03B98A
+	# work
+        signingkey = 21368D1B06FF1F09
+	# personal
+	# signingkey = A38CF7795F4A6ADD
 [push]
         default = current
 [alias]
