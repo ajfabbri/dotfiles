@@ -3,6 +3,8 @@ alias ta="tmux attach"
 alias vim="nvim"
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
+alias treeg='tree --gitignore'
+alias treed='tree -d --gitignore'
 
 export EDITOR=vim
 
