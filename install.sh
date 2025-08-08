@@ -32,11 +32,13 @@ do_link() {
 
 print_hints() {
     info "Finished install."
-    echo "You should also make sure you have a recent version of neovim, e.g:"
-    echo "  cd ~/bin && wget https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
-    echo "  sudo apt install fuse"
-    echo "  sudo ln -s $HOME/bin/nvim.appimage /usr/bin/vim"
+    echo "You should also make sure you have a recent version of neovim."
     echo "And install apt packages for fd-find ripgrep clangd clang"
+    # if running on Mac print extra hints
+    if [ "$(uname)" == "Darwin" ]; then
+        echo "On mac, consider adding this to ~/.asdfrc:"
+        echo "  java_macos_integration_enable=yes"
+    fi
 }
 
 pushd $HOME || die chdir

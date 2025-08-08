@@ -91,9 +91,11 @@ export GPG_TTY=$(tty)
 # work
 ulimit -n 4096
 
+# local bin dir
+export PATH=$HOME/bin:$PATH
+
 # typescript
 export NPM_PACKAGES="$HOME/.npm-packages"
-export PATH=$HOME/bin:$PATH
 export PATH="$NPM_PACKAGES/bin:$PATH"
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
@@ -103,3 +105,15 @@ export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # ansible-lint / pip
 export PATH=$PATH:$HOME/.local/bin
 eval "$(direnv hook bash)"
+
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+. ~/.asdf/plugins/java/set-java-home.bash
+# append completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+# CLDR
+source "$(brew --prefix)/lib/cloudera-cloud-users.sh"
+export MOW_AUTH_TOOL=none
