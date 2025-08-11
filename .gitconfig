@@ -16,7 +16,7 @@
         s = status
         sw = switch
         b = branch
-        bt = git branch --sort=-committerdate --format="%(refname:short) %(committerdate:short) "
+        bt = branch --sort=-committerdate --format='%(refname:short) %(committerdate:short)'
 [pull]
         ff = only
 [filter "lfs"]
