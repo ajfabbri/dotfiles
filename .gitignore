@@ -4,3 +4,4 @@
 /doc/tags
 lazy-lock.json
 .luarc.json
+.config/nvim/target/
