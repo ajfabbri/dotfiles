@@ -5,6 +5,7 @@ vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.wo.foldlevel = 99
 
+vim.lsp.set_log_level("info")
 -- highlight trailing whitespace
 -- TODO this--if it would higlight Errors, and remove better whitespace dependency
 -- vim.fn.matchadd('errorMsg', [[\s\+$]])
@@ -13,6 +14,7 @@ vim.wo.foldlevel = 99
 vim.cmd([[autocmd BufRead,BufNewFile *.avsc set filetype=json]])
 
 -- lazy.nvim bootstrap
+import = 'lsp'
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 local uv = vim.uv or vim.loop
 if not uv.fs_stat(lazypath) then
@@ -48,18 +50,16 @@ require('lazy').setup({
     { 'ntpeters/vim-better-whitespace' },
     -- treesitter
     {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-    -- lspzero
-    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x', },
     -- LSP Support
     { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
-    { 'neovim/nvim-lspconfig' },
+    --{ 'williamboman/mason-lspconfig.nvim' },
+    --{ 'neovim/nvim-lspconfig' },
 
     -- Rust-specific
-    { 'mrcjkb/rustaceanvim',              version = '^4',  lazy = false, }, -- This plugin is already lazy
+    { 'mrcjkb/rustaceanvim',              version = '^6',  lazy = false, }, -- This plugin is already lazy
 
     -- Java
-    {'nvim-java/nvim-java'},
+    { 'mfussenegger/nvim-jdtls' },
 
     -- Autocompletion and snippets
     { 'hrsh7th/cmp-nvim-lsp' },
@@ -69,7 +69,7 @@ require('lazy').setup({
     --{ 'hrsh7th/cmp-cmdline' },
 
     -- preferred snip impl w/ lsp-zero
-    { 'L3MON4D3/LuaSnip' },
+    -- { 'L3MON4D3/LuaSnip' },
     --{ 'onsails/lspkind-nvim' },
 
     -- whichkey
@@ -122,84 +122,53 @@ require('custom.java')
 -- additional key mappings
 require('custom.whichkey')
 
+-- TODO no longer should need lsp-zero.
 -- lsp-zero
-local lspz = require('lsp-zero').preset({})
-lspz.set_sign_icons({
-    error = '✘',
-    warn = '▲',
-    hint = '⚑',
-    info = '»'
-})
-
-lspz.on_attach(function(_client, bufnr)
-    -- see :help lsp-zero-keybindings
-    -- to learn the available actions
-    lspz.default_keymaps({ buffer = bufnr })
-    -- Defaults:
-    -- K lsp hover
-    -- gd	goto definition
-    -- gD goto declaration
-    -- gi list implementations
-    -- go goto type definition of obj under cursor
-    -- gr list references
-    -- gs list signature
-    -- gl Show diagnostics floating window
-    -- [d goto previous diag.
-    -- ]d goto next diag.
-end)
+-- local lspz = require('lsp-zero').preset({})
+-- lspz.set_sign_icons({
+--     error = '✘',
+--     warn = '▲',
+--     hint = '⚑',
+--     info = '»'
+-- })
+--
+-- lspz.on_attach(function(_client, bufnr)
+--     -- see :help lsp-zero-keybindings
+--     -- to learn the available actions
+--     lspz.default_keymaps({ buffer = bufnr })
+--     -- Defaults:
+--     -- K lsp hover
+--     -- gd	goto definition
+--     -- gD goto declaration
+--     -- gi list implementations
+--     -- go goto type definition of obj under cursor
+--     -- gr list references
+--     -- gs list signature
+--     -- gl Show diagnostics floating window
+--     -- [d goto previous diag.
+--     -- ]d goto next diag.
+-- end)
 
 vim.g.rustaceanvim = {
     server = {
-        capabilities = lspz.get_capabilities(),
-        on_attach = function(client, bufnr)
-            lspz.on_attach(client, bufnr)
-            -- you can also put keymaps here
-        end,
         -- see also rust-analyzer.json in project root
         default_settings = {
             ['rust-analyzer'] = {
-
             }
         }
     }
 }
--- pre-lspconfig init
-require('java').setup()
-
-lspz.setup_servers({ 'ts_ls' })
-require('lspconfig').jdtls.setup({})
-require 'lspconfig'.clangd.setup {
-    cmd = { "clangd-15" },
-}
-lspz.setup()
--- end lsp-zero setup
 
 -- git signs
 require('gitsigns').setup()
 
 -- mason
-require('mason').setup({})
-require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'ts_ls', 'pyright' },
-    handlers = {
-        lua_ls = function()
-            local lua_opts = lspz.nvim_lua_ls()
-            require('lspconfig').lua_ls.setup(lua_opts)
-        end,
-        function(server_name)
-            require('lspconfig')[server_name].setup({})
-        end,
-        rust_analyzer = lspz.noop,
-    }
-})
-
--- pyright
-require 'lspconfig'.pyright.setup {}
+require('mason').setup()
 
 -- copilot
 require('copilot').setup({
-    suggestion = { enabled = false },
-    panel = { enabled = false },
+    suggestion = { enabled = true },
+    panel = { enabled = true },
     filetypes = {
         markdown = true,
         typescript = true,
@@ -228,14 +197,13 @@ vim.g.neoformat_try_node_exe = 1
 
 -- CMP
 local cmp = require('cmp')
-local cmp_format = require('lsp-zero').cmp_format()
 cmp.setup({
     sources = {
         { name = 'copilot' },
         { name = 'nvim_lsp' },
         { name = 'path' },
     },
-    formatting = cmp_format,
+    --formatting = cmp_format,
     mapping = cmp.mapping.preset.insert({
         -- Scroll doc window
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
@@ -245,7 +213,83 @@ cmp.setup({
             select = false,
         }),
     }),
+    snippet = {
+        expand = function(args)
+            vim.snippet.expand(args.body)
+        end,
+    },
 })
+
+--  _     ____  ____
+-- | |   / ___||  _ \
+-- | |   \___ \| |_) |
+-- | |___ ___) |  __/
+-- |_____|____/|_|
+
+-- Defaults
+local caps = require('cmp_nvim_lsp').default_capabilities()
+vim.lsp.config('*', {
+    root_markers = { '.git' },
+    capabilities = caps,
+})
+
+local lsps = {
+--    { "rust_analyzer" },
+    { "arduino_language_server" },
+    { "clangd", },
+    { "jdtls" },
+    { "lua_ls" },
+    { "pyright" },
+    { "ts_ls" },
+}
+
+local function try_require(path)
+    local ok, mod = pcall(require, path)
+    if ok then return mod end
+    vim.notify("Could not load module: " .. path .. " -> " .. tostring(mod), vim.log.levels.WARN)
+    return nil
+end
+
+local function notify(msg)
+    vim.notify("[LSP] " .. msg, vim.log.levels.INFO)
+end
+
+for _, entry in pairs(lsps) do
+    local name, inline = entry[1], entry[2]
+
+    -- Try inline config first
+    local config = inline
+
+    -- If no inline config, try ~/.config/nvim/lua/lsp/<name>.lua
+    if not config then
+        config = try_require("lsp." .. name)
+        -- notify(" load lsp." .. name .. " -> ")
+
+        if config then
+            for k, v in ipairs(config) do
+                notify("     " .. k .. ": " .. tostring(v))
+            end
+        end
+    end
+
+    -- If we found a config (inline or file), register it
+    if config then
+        vim.lsp.config(name, config)
+    end
+
+    -- Enable the server (with config or defaults)
+    notify("Enabled " .. name)
+    vim.lsp.enable(name)
+end
+
+vim.api.nvim_create_user_command("LspInfo", function()
+  require("lsp.ui").info()
+end, {})
+
+vim.api.nvim_create_user_command("LspLog", function()
+  require("lsp.ui").log()
+end, {})
+
 
 -- nvim-lint
 require('lint').linters_by_ft = {
