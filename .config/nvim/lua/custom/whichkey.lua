@@ -33,7 +33,13 @@ wk.add({
     { "<leader>gc", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", desc = "goto Callers" },
     { "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "goto definition" },
     { "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "goto Implementation" },
-    { "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "List of diagnostics" },
+    --{ "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "List of diagnostics" },
+    { "<leader>gl", function()
+        vim.print("using telescope diagnostics for current buffer")
+      require("telescope.builtin").diagnostics({
+          bufnr = 0,   -- only current buffer
+      })
+    end, desc = "List of diagnostics" },
     { "<leader>gr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "goto References" },
     { "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "goto Signature help" },
     { "<leader>gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc = "goto Type definition" },
