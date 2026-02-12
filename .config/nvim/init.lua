@@ -283,7 +283,9 @@ for _, entry in pairs(lsps) do
 end
 
 vim.api.nvim_create_user_command("LspInfo", function()
-  require("lsp.ui").info()
+  --require("lsp.ui").info()
+  local pb = require("utils.print_buf")
+  pb.print_buf(vim.lsp.get_clients())
 end, {})
 
 vim.api.nvim_create_user_command("LspLog", function()
