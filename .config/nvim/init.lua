@@ -1,5 +1,6 @@
 local vim = vim
 vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 vim.wo.relativenumber = true
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -13,28 +14,27 @@ vim.lsp.set_log_level("info")
 -- Detect .avsc files as JSON
 vim.cmd([[autocmd BufRead,BufNewFile *.avsc set filetype=json]])
 
--- lazy.nvim bootstrap
-import = 'lsp'
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-local uv = vim.uv or vim.loop
-if not uv.fs_stat(lazypath) then
-    print('Installing lazy.nvim....')
-    vim.fn.system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
-        lazypath,
-    })
-    print('Done.')
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
-
 vim.opt.rtp:prepend(lazypath)
 -- end lazy.nvim bootstrap
 
 -- Plugins
 require('lazy').setup({
+  spec = {
     -- color schemes
     { 'folke/tokyonight.nvim' },
     { 'gilgigilgil/anderson.vim' },
@@ -49,7 +49,7 @@ require('lazy').setup({
     },
     { 'ntpeters/vim-better-whitespace' },
     -- treesitter
-    {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+    {'nvim-treesitter/nvim-treesitter', lazy = false, build = ':TSUpdate' },
     -- LSP Support
     { 'williamboman/mason.nvim' },
     --{ 'williamboman/mason-lspconfig.nvim' },
@@ -112,6 +112,8 @@ require('lazy').setup({
         "pavanbhat1999/figlet.nvim",
 		dependencies = "numToStr/Comment.nvim",
     },
+  },
+  checker = { enabled = true },
 })
 
 -- Configuration
@@ -158,12 +160,27 @@ vim.g.rustaceanvim = {
         }
     }
 }
-
+-- treesitter
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { 'c', 'cpp', 'java', 'lua', 'python', 'rust', 'typescript', 'yaml', 'bash' },
+    highlight = { enable = true },
+    indent = { enable = true },
+}
 -- git signs
 require('gitsigns').setup()
 
 -- mason
 require('mason').setup()
+
+-- treesitter
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c', 'cpp', 'java', 'lua', 'python', 'rust', 'typescript', 'yaml', 'sh' },
+    callback = function()
+        vim.treesitter.start()
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[0][0].foldmethod = 'expr'
+    end,
+})
 
 -- copilot
 require('copilot').setup({
