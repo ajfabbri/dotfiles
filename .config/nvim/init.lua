@@ -2,8 +2,6 @@ local vim = vim
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 vim.wo.relativenumber = true
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.wo.foldlevel = 99
 
 vim.lsp.set_log_level("info")
