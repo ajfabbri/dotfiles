@@ -4,7 +4,7 @@ vim.g.maplocalleader = '\\'
 vim.wo.relativenumber = true
 vim.wo.foldlevel = 99
 
-vim.lsp.set_log_level("info")
+vim.lsp.set_log_level("warn")
 -- highlight trailing whitespace
 -- TODO this--if it would higlight Errors, and remove better whitespace dependency
 -- vim.fn.matchadd('errorMsg', [[\s\+$]])
