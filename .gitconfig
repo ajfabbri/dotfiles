@@ -10,9 +10,7 @@
 [alias]
         d = diff
         dc = diff --cached
-        lg =  log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)\
-            - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- \
-            %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+         lg = log --graph --abbrev-commit --decorate --format='%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%<(48,trunc)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
         s = status
         sw = switch
         b = branch
