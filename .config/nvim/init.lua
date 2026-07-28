@@ -4,7 +4,7 @@ vim.g.maplocalleader = '\\'
 vim.wo.relativenumber = true
 vim.wo.foldlevel = 99
 
-vim.lsp.set_log_level("warn")
+vim.lsp.log.set_log("warn")
 -- highlight trailing whitespace
 -- TODO this--if it would higlight Errors, and remove better whitespace dependency
 -- vim.fn.matchadd('errorMsg', [[\s\+$]])
@@ -47,7 +47,7 @@ require('lazy').setup({
     },
     { 'ntpeters/vim-better-whitespace' },
     -- treesitter
-    {'nvim-treesitter/nvim-treesitter', lazy = false, build = ':TSUpdate' },
+    {'nvim-treesitter/nvim-treesitter', branch = "main", lazy = false, build = ':TSUpdate' },
     -- LSP Support
     { 'williamboman/mason.nvim' },
     --{ 'williamboman/mason-lspconfig.nvim' },
@@ -86,7 +86,7 @@ require('lazy').setup({
     -- telescope
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.8',
+        tag = 'v0.2.1',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     -- lualine
@@ -158,12 +158,21 @@ vim.g.rustaceanvim = {
         }
     }
 }
--- treesitter
-require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'c', 'cpp', 'java', 'lua', 'python', 'rust', 'typescript', 'yaml', 'bash' },
-    highlight = { enable = true },
-    indent = { enable = true },
-}
+
+-- new neovim treesitter integration
+local langs = { 'c', 'cpp', 'java', 'lua', 'python', 'rust', 'typescript', 'yaml', 'bash' }
+-- install parsers
+require('nvim-treesitter').install(langs)
+
+-- enable highlighting only for those filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = langs,
+  callback = function()
+    vim.treesitter.start()
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
 -- git signs
 require('gitsigns').setup()
 
