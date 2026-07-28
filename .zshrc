@@ -56,3 +56,7 @@ export PATH="$(go env GOPATH)/bin:$PATH"
 
 export TFENV_ARCH=amd64
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
