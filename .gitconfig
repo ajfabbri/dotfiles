@@ -2,7 +2,7 @@
         name = Aaron Fabbri
         email = 558234+ajfabbri@users.noreply.github.com
 	# work
-        signingkey = 21368D1B06FF1F09
+	signingkey = 10CBA5211CFB0590
 	# personal
 	# signingkey = A38CF7795F4A6ADD
 [push]
