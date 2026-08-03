@@ -32,8 +32,10 @@ do_link() {
 
 print_hints() {
     info "Finished install."
-    echo "You should also make sure you have a recent version of neovim."
-    echo "And install apt packages for fd-find ripgrep clangd clang"
+    info "Note:"
+    echo "- Make sure you have a recent version of neovim."
+    echo "- Install packages for fd-find ripgrep clangd clang"
+    echo "- Place github MCP PAT in ~/.config/github_mcp_pat.txt"
     # if running on Mac print extra hints
     if [ "$(uname)" == "Darwin" ]; then
         echo "On mac, consider adding this to ~/.asdfrc:"
@@ -54,7 +56,7 @@ fi
 
 # general config
 ALL=".gitconfig .ideavimrc .tmux.conf .config/nvim .zshrc .bashrc .profile .editorconfig"
-ALL+=" .wezterm.lua"
+ALL+=" .wezterm.lua .config/opencode/opencode.jsonc"
 
 info "Backing up existing stuff to .dotfilesbackup"
 rsync -abL $ALL .dotfilesbackup/ || info "Ignoring missing files; new install"
@@ -64,6 +66,8 @@ mv -f .vimrc .dotfilesbackup
 
 info "Symlinking to new goodness in $DOT_INSTALL_DIR."
 mkdir $HOME/.config || info "Ignoring existing .config dir"
+mkdir $HOME/.config/opencode || info "Ignoring existing opencode dir"
+
 for f in $ALL
 do
     do_link $f
@@ -72,8 +76,3 @@ done
 
 print_hints
 popd
-
-# optional AI taking over my job
-if [ "$2" == "copilot" ] ; then
-	echo "*** You need to install node.js: https://nodejs.org/en/download ***"
-fi

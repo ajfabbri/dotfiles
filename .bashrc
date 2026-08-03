@@ -106,6 +106,9 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+# opencode
+export GITHUB_MCP_PAT=$(cat ~/.config/github_mcp_pat.txt)
+
 # CLDR
 source "$(brew --prefix)/lib/cloudera-cloud-users.sh"
 export MOW_AUTH_TOOL=none

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "bash": {
+      "rm": "ask",
+      // "rm -fr *": "ask",
+      // "rm -rf *": "ask",
+      // "rm -f *": "ask",
+
+      // CLDR requirements
+      "bash": "ask", "write": "ask", "external_directory": "ask"
+
+    }
+  },
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_MCP_PAT}"
+      }
+    }
+  },
+  "provider": {
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM",
+      "options": {
+        "baseURL": "https://ai-gateway.cloudops.cloudera.com"
+      },
+      "models": {
+        "claude-sonnet-4-6": {
+          "name": "us.anthropic.claude-sonnet-4-6"
+        },
+        "claude-opus-4-6": {
+          "name": "us.anthropic.claude-opus-4-6-v1"
+        },
+        "claude-haiku-4-5": {
+          "name": "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+        },
+        "claude-opus-4-7": {
+          "name": "us.anthropic.claude-opus-4-7"
+        },
+        "claude-opus-4-8": {
+          "name": "us.anthropic.claude-opus-4-8"
+        },
+        "gpt-4o": {
+          "name": "azure/cloudops-gpt-4o"
+        },
+        "gpt-5.1": {
+          "name": "azure/cloudops-gpt-5.1"
+        },
+        "gpt-5.2": {
+          "name": "azure/gpt-5.2"
+        },
+        "gpt-5.1-codex": {
+          "name": "azure/cloudops-gpt-5.1-codex"
+        },
+        "gpt-5.2-codex": {
+          "name": "azure/cloudops-gpt-5.2-codex"
+        },
+        "gpt-5.4": {
+          "name": "azure/cloudops-gpt-5.4"
+        },
+        "gemini-2.0-flash": {
+          "name": "gemini-2.0-flash"
+        },
+        "gemini-2.5-pro": {
+          "name": "gemini-2.5-pro"
+        },
+        "gemini-3.1-flash-lite-preview": {
+          "name": "gemini-3.1-flash-lite-preview"
+        },
+        "gemini-3.1-pro-preview": {
+          "name": "gemini-3.1-pro-preview"
+        },
+        "gemini-3-flash-preview": {
+          "name": "vertex_ai/gemini-3-flash-preview"
+        }
+      }
+    }
+  }
+}
+}

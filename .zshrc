@@ -60,3 +60,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+
+# opencode
+export GITHUB_MCP_PAT=$(cat ~/.config/github_mcp_pat.txt)
