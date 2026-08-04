@@ -25,44 +25,45 @@
   },
   "provider": {
     "litellm": {
+      "cache": false,
       "npm": "@ai-sdk/openai-compatible",
       "name": "LiteLLM",
       "options": {
         "baseURL": "https://ai-gateway.cloudops.cloudera.com"
       },
       "models": {
-        "claude-sonnet-4-6": {
-          "name": "us.anthropic.claude-sonnet-4-6"
+        "us.anthropic.claude-sonnet-4-6": {
+            "name": "claude-sonnet-4-6"
         },
-        "claude-opus-4-6": {
-          "name": "us.anthropic.claude-opus-4-6-v1"
+        "us.anthropic.claude-opus-4-6-v1" : {
+          "name": "claude-opus-4-6"
         },
-        "claude-haiku-4-5": {
-          "name": "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "name": "claude-haiku-4-5"
         },
-        "claude-opus-4-7": {
-          "name": "us.anthropic.claude-opus-4-7"
+        "us.anthropic.claude-opus-4-7": {
+          "name": "claude-opus-4-7"
         },
-        "claude-opus-4-8": {
-          "name": "us.anthropic.claude-opus-4-8"
+        "us.anthropic.claude-opus-4-8": {
+          "name": "claude-opus-4-8"
         },
-        "gpt-4o": {
-          "name": "azure/cloudops-gpt-4o"
+        "azure/cloudops-gpt-4o": {
+          "name": "gpt-4o"
         },
-        "gpt-5.1": {
-          "name": "azure/cloudops-gpt-5.1"
+        "azure/cloudops-gpt-5.1": {
+          "name": "gpt-5.1"
         },
-        "gpt-5.2": {
-          "name": "azure/gpt-5.2"
+        "azure/gpt-5.2": {
+          "name": "gpt-5.2"
         },
-        "gpt-5.1-codex": {
-          "name": "azure/cloudops-gpt-5.1-codex"
+        "azure/cloudops-gpt-5.1-codex": {
+          "name": "gpt-5.1-codex"
         },
-        "gpt-5.2-codex": {
-          "name": "azure/cloudops-gpt-5.2-codex"
+        "azure/gpt-5.2-codex": {
+          "name": "gpt-5.2-codex"
         },
-        "gpt-5.4": {
-          "name": "azure/cloudops-gpt-5.4"
+        "azure/cloudops-gpt-5.4": {
+          "name": "gpt-5.4"
         },
         "gemini-2.0-flash": {
           "name": "gemini-2.0-flash"
@@ -76,11 +77,10 @@
         "gemini-3.1-pro-preview": {
           "name": "gemini-3.1-pro-preview"
         },
-        "gemini-3-flash-preview": {
-          "name": "vertex_ai/gemini-3-flash-preview"
+        "vertex_ai/gemini-3-flash-preview": {
+          "name": "gemini-3-flash-preview"
         }
       }
     }
   }
-}
 }
